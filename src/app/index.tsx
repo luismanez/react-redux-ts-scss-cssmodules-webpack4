@@ -1,10 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Header } from './components/Header/Header';
+import { App } from './components/App';
 
 ReactDOM.render(
-    <Header 
-        compiler="Typescript" 
-        framework="React" 
-        bundler="Webpack" />,
+    <App />,
     document.getElementById('root'));
