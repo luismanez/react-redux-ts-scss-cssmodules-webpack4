@@ -2,6 +2,7 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -16,12 +17,20 @@ module.exports = {
       /css\.d\.ts$/,
       /scss\.d\.ts$/
     ]),
+    new ForkTsCheckerWebpackPlugin(),
   ],
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true
+            }
+          }
+        ],
         exclude: /node_modules/
       },      
       {
@@ -30,7 +39,6 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              //name: '[path][name].[ext]',
               outputPath: 'images/'
             }
           }
